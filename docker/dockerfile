@@ -1,0 +1,10 @@
+FROM docker.elastic.co/logstash/logstash:7.2.1
+WORKDIR /
+USER root
+RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+RUN rm -f /usr/share/logstash/config/logstash.yml
+RUN yum install git -y
+RUN mkdir logstash && cd /logstash
+RUN git clone https://github.com/tom576/logstash_container_poc.git
+RUN cp /logstash_container_poc/rabbit_pipeline.conf  /usr/share/logstash/pipeline/logstash.conf
+
